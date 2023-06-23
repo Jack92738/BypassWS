@@ -1,0 +1,19 @@
+local player = game.Players.LocalPlayer
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local speedPotion = replicatedStorage.Items["speed_potion"]
+
+local function activateSpeedPotion()
+    local humanoid = player.Character and player.Character:FindFirstChild("Humanoid")
+    
+    if humanoid and humanoid:FindFirstChild(speedPotion.Name) then
+        humanoid.WalkSpeed = 32
+        warningNotification("SP Private", "Bypassed walkspeed", 5)
+    end
+end
+
+while true do
+    if player and speedPotion then
+        activateSpeedPotion()
+    end
+    replicatedStorage.ChildAdded:Wait() -- Automatically triggers the activation function when the speed potion is picked up
+end
